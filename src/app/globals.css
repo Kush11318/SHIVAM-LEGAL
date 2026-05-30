@@ -1,26 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090909;
+  --foreground: #F8F5EE;
+  
+  --primary-dark: #090909;
+  --charcoal: #121212;
+  --accent-gold: #D4AF37;
+  --gold-light: #F3E5AB;
+  --warm-ivory: #F8F5EE;
+  --soft-gray: #A0A0A0;
+  
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base resets & styling */
+html, body {
+  background-color: var(--primary-dark);
+  color: var(--warm-ivory);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: auto !important; /* Managed by Lenis */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Custom premium classes */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #B58A26 0%, #D4AF37 50%, #F5D77F 100%);
+}
+
+.bg-gold-text {
+  background: linear-gradient(135deg, #F8F5EE 20%, #D4AF37 60%, #B58A26 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxury-card {
+  background: rgba(18, 18, 18, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 30px 60px rgba(212, 175, 55, 0.05);
+}
+
+.gold-glow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.gold-border-glow:focus-within {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Smooth Scroll overrides for Lenis */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Cinematic text animations classes */
+.char-animation {
+  display: inline-block;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+/* Custom styles for Moot and leadership dots */
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--accent-gold);
+}
+
+/* Submit golden ripple animation keyframes */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 229, 171, 0.8) 0%, rgba(212, 175, 55, 0.4) 60%, rgba(212, 175, 55, 0) 100%);
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+  animation: ripple 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  pointer-events: none;
 }
+
+/* Page transitions / layouts */
+.hero-text-shadow {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.signature-svg path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.signature-svg.animate path {
+  animation: draw 4s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Prestige Typography - Lady Justice Gold Hover Reflection */
+.hero-title {
+  position: relative;
+  transition: text-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: text-shadow, color, letter-spacing;
+}
+
+.hero-title:hover {
+  color: #FFFDF9 !important;
+  text-shadow: 
+    0 0 18px rgba(212, 175, 55, 0.55), 
+    0 0 35px rgba(212, 175, 55, 0.22),
+    -1px 1px 0px rgba(212, 175, 55, 0.4);
+}
+
+/* Thin golden grid lines that appear occasionally */
+.gold-grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-size: 100px 100px;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: color-dodge;
+  animation: gridBreathe 14s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes gridBreathe {
+  0% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
